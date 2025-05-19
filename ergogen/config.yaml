@@ -169,11 +169,11 @@ points:
               led_next: LED_4
       rows:
         bottom:
-          row_net: R0
-        home:
           row_net: R1
-        top:
+        home:
           row_net: R2
+        top:
+          row_net: R3
 
     # Thumb cluster
     thumbfan:
@@ -193,13 +193,14 @@ points:
           key:
             splay: -splay_thumb_middle
             rotate: 90
-            column_net: C2
+            column_net: C3
             tags:
               - key
               - thumb_key
               - key_1_5u
           rows:
             home.key:
+              row_net: R1
               led_prev: LED_4
               led_next: LED_5
         far:
@@ -215,11 +216,11 @@ points:
               - key_1_5u
           rows:
             home.key:
+              row_net: R2
               led_prev: ULED_4
               led_next: LED_1
       rows:
         home:
-          row_net: R3
 
     # Helper points
     underglow_led_1:
@@ -353,28 +354,28 @@ points:
         - helper
         - screw
       anchor:
-        - ref: matrix_ring_top
-          shift: [-0.5 ks, -0.5 kp]
+        - ref: matrix_pinky_top
+          shift: [0.666 ks, 0.5 kp]
     screw_pcb_left_bottom:
       key.tags:
         - helper
         - screw
       anchor:
-        - ref: matrix_ring_home
-          shift: [-0.5 ks, -0.5 kp]
+        - ref: matrix_pinky_home
+          shift: [0.666 ks, -0.25 kp]
     screw_pcb_right_top:
       key.tags:
         - helper
         - screw
       anchor:
         - ref: matrix_index_top
-          shift: [-0.5 ks -0.032, -0.5 kp +1.139]
+          shift: [-0.666 ks, -0.5 kp]
     screw_pcb_thumbfan_left:
       key.tags:
         - helper
         - screw
       anchor:
-        - ref: thumbfan_far_home
+        - ref: thumbfan_near_home
           shift: [0, 0.5 kp + 2.631]
     screw_pcb_thumbfan_right:
       key.tags:
@@ -388,16 +389,16 @@ points:
         - helper
         - screw
       anchor:
-        - ref: matrix_index_bottom
-          shift: [0.67 ks + 0.032, -0.15 kp -0.001]
+        - ref: thumbfan_far_home
+          shift: [0, 0.5 kp +2.631]
     screw_mcu_cover_right:
       key.tags:
         - helper
         - screw
       anchor:
-        - ref: matrix_index_bottom
-          shift: [1.45 ks - 0.356, -0.6 ks +0.03]
-
+        - ref: thumbfan_far_home
+          shift: [0, 0.5 kp +2.631]
+          
 outlines:
   _debug_points:
     - what: rectangle
@@ -930,7 +931,7 @@ pcbs:
           include_bosses: true
         adjust:
           rotate: 172.5
-          shift: [0, -2*kp]
+          shift: [0, -2.125*kp]
       
       battery_connector:  
         what: ceoloide/battery_connector_jst_ph_2
