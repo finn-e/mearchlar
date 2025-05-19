@@ -1,15 +1,15 @@
 meta:
   engine: 4.1.0
-  name: corney-island
+  name: méarchlár
   version: 0.2
-  ref: &kb_ref "Corney Island v0.2"
-  author: ceoloide
-  url: &kb_url https://github.com/ceoloide/corney-island
+  ref: &kb_ref "méarchlár v0.1"
+  author: finn-e
+  url: &kb_url https://github.com/finn-e/mearchlar
   footprint: &switch_footprint "ceoloide/switch_mx"
   # footprint: &switch_footprint "ceoloide/switch_choc_v1_v2"
   switch:
-    $extends: presets.mx
-    # $extends: presets.choc_v1
+    # $extends: presets.mx
+    $extends: presets.choc_v1
     # $extends: presets.choc_v2
 
 presets:
@@ -38,8 +38,8 @@ presets:
     # Key and keycap measures
     kx: cx # spacing between key centers (X-axis)
     ky: cy # spacing between key centers (Y-axis)
-    ks: 18.5 # horizontal space between columns (default: 19)
-    kp: 17.5 # vertical padding between keys (deafult: 19)
+    ks: 18 # horizontal space between columns (default: 19)
+    kp: 17 # vertical padding between keys (deafult: 19)
     kcow: 13.8 # key cutout hole width (cherry, choc v2: 14, choc v1: 13.8)
     kcoh: 13.8 # key cutout hole height (cherry, choc v2: 14, choc v1: 13.8)
     keycw: 17.5 # keycap width (cherry: 18, choc: 17.5)
@@ -108,95 +108,72 @@ points:
         rotate: hand_rotation
         shift: [100, -100] # Fix KiCad placement
       columns:
-        outer:
-          key:
-            column_net: C0
-          rows:
-            top.key:
-              led_prev: LED_18
-              led_next: LED_19
-            home.key:
-              led_prev: LED_19
-              led_next: LED_20
-            bottom.key:
-              led_prev: LED_20
-              led_next: LED_21
         pinky:
           key:
-            column_net: C1
-          rows:
-            top.key:
-              led_prev: LED_17
-              led_next: LED_18
-            home.key:
-              led_prev: LED_16
-              led_next: LED_17
-            bottom.key:
-              led_prev: LED_15
-              led_next: LED_16
-        ring:
-          key:
-            stagger: 0.25 kp
-            column_net: C2
+            column_net: C0
           rows:
             top.key:
               led_prev: LED_12
               led_next: LED_13
             home.key:
-              led_prev: LED_13
-              led_next: LED_14
+              led_prev: LED_11
+              led_next: LED_12
+            bottom.skip: true
+        ring:
+          key:
+            stagger: kp
+            splay: -10
+            spread: kx+4
+            column_net: C1
+          rows:
+            top.key:
+              led_prev: LED_8
+              led_next: LED_9
+            home.key:
+              led_prev: LED_9
+              led_next: LED_10
             bottom.key:
-              led_prev: LED_14
-              led_next: LED_15
+              led_prev: LED_10
+              led_next: LED_11
         middle:
           key:
-            stagger: 0.125 kp
+            stagger: 0.25 kp
+            splay: -5
+            spread: kx+4
+            column_net: C2
+          rows:
+            top.key:
+              led_prev: LED_7
+              led_next: LED_8
+            home.key:
+              led_prev: LED_6
+              led_next: LED_7
+            bottom.key:
+              led_prev: LED_5
+              led_next: LED_6
+        index:
+          key:
+            stagger: -0.75 kp
+            splay: -10
+            spread: kx+4
             column_net: C3
           rows:
             top.key:
-              led_prev: LED_11
-              led_next: LED_12
-            home.key:
-              led_prev: LED_10
-              led_next: LED_11
-            bottom.key:
-              led_prev: LED_9
-              led_next: LED_10
-        index:
-          key:
-            stagger: -0.125 kp
-            column_net: C4
-          rows:
-            top.key:
-              led_prev: LED_4
-              led_next: LED_5
-            home.key:
-              led_prev: LED_5
-              led_next: LED_6
-            bottom.key:
-              led_prev: LED_6
-              led_next: LED_7
-        inner:
-          key:
-            stagger: -0.125 kp
-            column_net: C5
-          rows:
-            top.key:
-              led_prev: LED_3
-              led_next: LED_4
+              led_prev: LED_1
+              led_next: LED_2
             home.key:
               led_prev: LED_2
               led_next: LED_3
             bottom.key:
-              led_prev: LED_1
-              led_next: LED_2
+              led_prev: LED_3
+              led_next: LED_4
       rows:
         bottom:
-          row_net: R2
+          row_net: R0
         home:
           row_net: R1
         top:
-          row_net: R0
+          row_net: R2
 
     # Thumb cluster
     thumbfan:
@@ -208,31 +185,28 @@ points:
           - key
           - thumb_key
       anchor:
-        ref: matrix_middle_bottom
-        shift: [0.5 ks, -kp -3]
+        ref: matrix_index_bottom
+        shift: [ks, -kp - 3]
       columns:
+
         near:
           key:
-            column_net: C3
-          rows:
-            home.key:
-              led_prev: LED_8
-              led_next: LED_9
-        mid:
-          key:
             splay: -splay_thumb_middle
-            column_net: C4
-            stagger: -2.750
-            spread: ks + 2
+            rotate: 90
+            column_net: C2
+            tags:
+              - key
+              - thumb_key
+              - key_1_5u
           rows:
             home.key:
-              led_prev: LED_7
-              led_next: LED_8
+              led_prev: LED_4
+              led_next: LED_5
         far:
           key:
             splay: -splay_thumb_far
             rotate: 90
-            column_net: C5
+            column_net: C3
             stagger: 2.122
             spread: ks + 3.463
             tags:
@@ -241,7 +215,7 @@ points:
               - key_1_5u
           rows:
             home.key:
-              led_prev: ULED_6
+              led_prev: ULED_4
               led_next: LED_1
       rows:
         home:
@@ -256,7 +230,7 @@ points:
         din: LED
         dout: ULED_1
       anchor:
-        - ref: matrix_inner_top
+        - ref: matrix_index_top
           shift: [0, vertical_underglow_shift]
 
     underglow_led_2:
@@ -267,7 +241,7 @@ points:
         din: ULED_1
         dout: ULED_2
       anchor:
-        - ref: matrix_middle_top
+        - ref: matrix_pinky_top
           shift: [0, vertical_underglow_shift]
 
     underglow_led_3:
@@ -278,7 +252,7 @@ points:
         din: ULED_2
         dout: ULED_3
       anchor:
-        - ref: matrix_pinky_top
+        - ref: matrix_pinky_home
           shift: [0, vertical_underglow_shift]
 
     underglow_led_4:
@@ -289,70 +263,52 @@ points:
         din: ULED_3
         dout: ULED_4
       anchor:
-        - ref: matrix_pinky_home
-          shift: [0, vertical_underglow_shift]
-
-    underglow_led_5:
-      key:
-        tags:
-          - helper
-          - underglow
-        din: ULED_4
-        dout: ULED_5
-      anchor:
-        - ref: matrix_middle_bottom
-          shift: [0, vertical_underglow_shift]
-
-    underglow_led_6:
-      key:
-        tags:
-          - helper
-          - underglow
-        din: ULED_5
-        dout: ULED_6
-      anchor:
-        - ref: matrix_inner_bottom
+        - ref: matrix_index_bottom
           shift: [0, vertical_underglow_shift]
 
     plate_outline_bottom_1:
       key.tags:
         - helper
       anchor:
-        - ref: matrix_ring_bottom
-          shift: [ks * 0.465 + 0.005, -kp * 0.74 + 0.07]
+        - ref: matrix_pinky_bottom
+          shift: [-ks/2, -kp * 0.74 - 0.07]
     plate_outline_bottom_2:
       key.tags:
         - helper
       anchor:
         - ref: thumbfan_near_home
-          shift: [-ks * 0.47 - 0.01, -kp * 0.475 - 0.05]
+          #shift: [-ks * 0.47 - 0.01, -kp * 0.475 - 0.05]
+          shift: [-13.25, 4]
     plate_outline_bottom_3:
       key.tags:
         - helper
-      anchor: 
-        - ref: thumbfan_far_home
-          shift: [-ks * 0.725 - 0.028,kp * 0.475 - 0.009]
-          affect: ['x','y']
+      anchor:
+        - ref: thumbfan_near_home
+          shift: [-0.75*ks, -kp/2]    
     plate_outline_bottom_4:
       key.tags:
         - helper
       anchor: 
         - ref: thumbfan_far_home
           shift: [-ks * 0.725 - 0.028,-kp * 0.48 + 0.023]
-          affect: ['x','y']
-
+    plate_outline_bottom_5:
+      key.tags:
+        - helper
+      anchor: 
+        - ref: thumbfan_far_home
+          shift: [ks * 0.725 - 0.028,-kp/2]
     mcu_cover_top_left:
       key.tags:
         - helper
       anchor:
-        - ref: matrix_inner_top
+        - ref: matrix_index_top
           shift: [ks * 0.53 + 0.043,kp * 0.35 - 0.015]
     mcu_cover_top_right:
       key.tags:
         - helper
       anchor:
         - ref: mcu_cover_top_left
-          shift: [ks + 0.72,0]
+          shift: [40,0]
     mcu_cover_bottom_right:
       key.tags:
         - helper
@@ -381,7 +337,7 @@ points:
         - helper
       anchor:
         - ref: mcu_cover_bottom_right
-          shift: [-0.63,0]
+          shift: [0,0]
     plate_additional_outline_bottom_left:
       key.tags:
         - helper
@@ -397,29 +353,29 @@ points:
         - helper
         - screw
       anchor:
-        - ref: matrix_pinky_top
+        - ref: matrix_ring_top
           shift: [-0.5 ks, -0.5 kp]
     screw_pcb_left_bottom:
       key.tags:
         - helper
         - screw
       anchor:
-        - ref: matrix_pinky_home
+        - ref: matrix_ring_home
           shift: [-0.5 ks, -0.5 kp]
     screw_pcb_right_top:
       key.tags:
         - helper
         - screw
       anchor:
-        - ref: matrix_inner_top
+        - ref: matrix_index_top
           shift: [-0.5 ks -0.032, -0.5 kp +1.139]
     screw_pcb_thumbfan_left:
       key.tags:
         - helper
         - screw
       anchor:
-        - ref: thumbfan_near_home
-          shift: [-0.5 ks -4.343, kp * 0.375 +0.01]
+        - ref: thumbfan_far_home
+          shift: [0, 0.5 kp + 2.631]
     screw_pcb_thumbfan_right:
       key.tags:
         - helper
@@ -432,14 +388,14 @@ points:
         - helper
         - screw
       anchor:
-        - ref: matrix_inner_bottom
+        - ref: matrix_index_bottom
           shift: [0.67 ks + 0.032, -0.15 kp -0.001]
     screw_mcu_cover_right:
       key.tags:
         - helper
         - screw
       anchor:
-        - ref: matrix_inner_bottom
+        - ref: matrix_index_bottom
           shift: [1.45 ks - 0.356, -0.6 ks +0.03]
 
 outlines:
@@ -515,7 +471,7 @@ outlines:
   _matrix_outline:
     - what: polygon
       points:
-        - ref: matrix_outer_top
+        - ref: matrix_pinky_top
           shift: [-ks * 0.47 +0.01, kp * 0.475 -0.015]
         - ref: matrix_ring_top
           shift: [-ks * 0.47 +0.01, kp * 0.225 -0.014]
@@ -533,17 +489,18 @@ outlines:
           shift: [ks * 0.478, kp * 0.475 -0.015]
         - ref: matrix_index_top
           shift: [ks * 0.478, kp * 0.34 +0.052]
-        - ref: matrix_inner_top
+        - ref: matrix_index_top
           shift: [ks * 0.478, kp * 0.468 -0.005]
         - ref: plate_additional_outline_top
         - ref: plate_additional_outline_bottom_left
         - ref: plate_additional_outline_bottom_right
+        - ref: plate_outline_bottom_5
         - ref: plate_outline_bottom_4
         - ref: plate_outline_bottom_3
         - ref: plate_outline_bottom_2
         - ref: plate_outline_bottom_1
-        - ref: matrix_outer_bottom
-          shift: [-ks * 0.47 +0.012, -kp * 0.485 -0.025]
+        - ref: matrix_pinky_home
+          shift: [-ks / 2, -kp * 0.485 -0.025]
   _plate_outline:
     - what: outline
       name: _matrix_outline
@@ -602,7 +559,7 @@ outlines:
       operation: subtract
   _mcu_wall_cutout:
     - what: rectangle
-      where: matrix_inner_top
+      where: matrix_index_top
       size: [8,40 + pcb_to_case_wall_tolerance * 2 + case_wall_thickness * 2]
       adjust:
         shift: [19.704 - 1.25 + pcb_to_case_wall_tolerance / 2 + case_wall_thickness, 0]
@@ -617,6 +574,12 @@ outlines:
     - what: outline
       name: _backplate_outline
       fillet: fillet_radius
+  for_fin:
+    - what: outline
+      name: _keycap_outlines
+    - what: outline
+      name: _pcb_outline
+      operation: stack
   pcb:
     - what: outline
       name: _pcb_outline
@@ -714,7 +677,7 @@ pcbs:
           hole_size: screw_diameter
           hole_drill: screw_diameter
 
-  _corney_island_baseline:
+  _mearchlar_baseline:
     template: kicad8
     outlines: &basepcb_outlines
       main:
@@ -745,6 +708,7 @@ pcbs:
           reversible: false
           hotswap: true
           include_silkscreen: false
+          include_corner_marks: true
           from: "{{column_net}}"
           to: "{{colrow}}_B"
           # The following parameters are specific to choc_v1_v2
@@ -800,8 +764,8 @@ pcbs:
           rotate: 90 + diode_rotation
 
       mcu:
-        what: ceoloide/mcu_nice_nano
-        where: matrix_inner_top
+        what: ceoloide/mcu_supermini_nrf52840
+        where: matrix_pinky_home
         params:
           P0: DAT
           P1: LED
@@ -809,15 +773,15 @@ pcbs:
           P20: C1
           P19: C2
           P18: C3
-          P15: C4
-          P14: C5
+          P15: P15
+          P14: P14
           P2: SDA
           P3: SCL
           P4: CS
-          P5: R0
-          P6: R1
-          P7: R2
-          P8: R3
+          P5: R3
+          P6: R2
+          P7: R1
+          P8: R0
           reversible: true
           include_traces: true
           show_silk_labels: true
@@ -825,7 +789,8 @@ pcbs:
           show_instructions: false
           use_rectangular_jumpers: true
         adjust:
-          shift: [19.704, 0.375 kp -18.37]
+          rotate: 90
+          shift: [ks/2, -kp - 1]
       
       jlcpcb_order_number_text:
         what: ceoloide/utility_text
@@ -834,9 +799,9 @@ pcbs:
           text: JLCJLCJLCJLC
           reversible: true
         adjust:
-          shift: [0, -0.65 kp]
+          shift: [0, kp/2]
   
-  corney_island:
+  mearchlar:
     template: kicad8
 
     outlines:
@@ -847,15 +812,16 @@ pcbs:
 
       display:
         what: ceoloide/display_ssd1306
-        where: matrix_inner_top
+        where: matrix_pinky_home
         params:
           reversible: true
         adjust:
-          shift: [0.5 ks + 10.147, 0.375 kp -24.058]
+          shift: [ks/2, -kp - 1]
+          #shift: [0.5 ks + 10.147, 0.375 kp -24.058]
 
       reset_switch:
         what: ceoloide/reset_switch_tht_top
-        where: matrix_inner_top
+        where: matrix_index_top
         params:
           from: GND
           to: RST
@@ -866,7 +832,7 @@ pcbs:
 
       trrs:
         what: ceoloide/trrs_pj320a
-        where: matrix_inner_top
+        where: matrix_index_top
         params:
           SL: GND
           R2: DAT
@@ -920,7 +886,7 @@ pcbs:
         adjust:
           rotate: 180
 
-  corney_island_wireless:
+  mearchlar_wireless:
     template: kicad8
     
     outlines:
@@ -931,7 +897,7 @@ pcbs:
       
       nice_view:
         what: ceoloide/display_nice_view
-        where: matrix_inner_top
+        where: matrix_pinky_home
         params:
           MOSI: SDA
           SCK: SCL
@@ -939,42 +905,47 @@ pcbs:
           include_labels: false
           invert_jumpers_position: true
         adjust:
-          shift: [0.5 ks + 10.147, 0.375 kp -20.75]
+          rotate: 90
+          shift: [ks/2 + 1.666, -kp - 1]
+          #shift: [0.5 ks + 10.147, 0.375 kp -20.75]
       
       on_off_switch:
         what: ceoloide/power_switch_smd_side
-        where: matrix_inner_top
+        where: matrix_ring_bottom
         params:
           from: BAT_P
           to: RAW
           reversible: true
         adjust:
-          shift: [1.5 ks -0.5, 0.375 kp -46.50]
+          rotate: -97.5
+          shift: [ks, -2.2666*kp]
       
       reset_switch:
         what: ceoloide/reset_switch_smd_side
-        where: matrix_inner_top
+        where: matrix_ring_bottom
         params:
           from: GND
           to: RST
           reversible: true
           include_bosses: true
         adjust:
-          shift: [19.704, 0.24 kp - 0.1]
+          rotate: 172.5
+          shift: [0, -2*kp]
       
       battery_connector:  
         what: ceoloide/battery_connector_jst_ph_2
-        where: matrix_inner_top
+        where: matrix_ring_bottom
         params:
           BAT_P: BAT_P
           BAT_N: GND
           reversible: true
           include_courtyard: false
         adjust:
-          shift: [0.5 ks + 7.25, 0.375 kp -45.25]
-          rotate: 90
+          shift: [ks, -0.25*kp]
+          rotate: -6
+
 cases:
-  corney_island_bottom_tray:
+  mearchlar_bottom_tray:
     - what: outline
       name: _bottom_case_walls
       extrude: bottom_plate_thickness + internal_distance_between_plates + top_plate_thickness
